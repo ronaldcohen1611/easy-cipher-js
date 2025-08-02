@@ -19,6 +19,7 @@ export class EasyCipher {
   private algorithm: CipherAlgorithm;
 
   /**
+   * @description - The EasyCipher class is used to encrypt and decrypt data.
    * @param cipherKey - The cipher key to use for the encryption and decryption. -- 32 characters long
    * @param algorithm - The algorithm to use for the encryption and decryption. -- aes-256-cbc is the default
    */

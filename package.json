@@ -1,6 +1,6 @@
 {
   "name": "easy-cipher-js",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A simple, secure TypeScript library for AES encryption and decryption ",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -19,8 +19,5 @@
   "devDependencies": {
     "@types/node": "^24.1.0",
     "typescript": "^5.9.2"
-  },
-  "dependencies": {
-    "easy-cipher-js": "file:easy-cipher-js-1.0.2.tgz"
   }
 }
