@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "build": "rm -rf dist && tsc --outDir dist",
     "unpack": "tar -xzf easy-cipher-js-*.tgz"
   },
@@ -18,6 +18,12 @@
   "packageManager": "pnpm@10.6.1",
   "devDependencies": {
     "@types/node": "^24.1.0",
+    "jest": "^30.0.5",
     "typescript": "^5.9.2"
+  },
+  "dependencies": {
+    "@types/jest": "^30.0.0",
+    "ts-jest": "^29.4.0",
+    "ts-node": "^10.9.2"
   }
 }
