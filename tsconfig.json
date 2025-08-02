@@ -22,5 +22,5 @@
     "skipLibCheck": true,
     "types": ["jest", "node"]
   },
-  "exclude": ["node_modules", "dist", "package", "test"]
+  "exclude": ["node_modules", "dist", "package", "test", "jest.config.*"]
 }
