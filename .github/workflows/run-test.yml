@@ -10,5 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3 
+      - run: npm install pnpm
       - run: pnpm install
       - run: pnpm test
