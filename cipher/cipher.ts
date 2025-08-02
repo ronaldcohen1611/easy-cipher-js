@@ -24,7 +24,6 @@ export class EasyCipher {
    */
   constructor(cipherKey: string, algorithm: CipherAlgorithm = 'aes-256-cbc') {
     if (cipherKey.length !== 32) {
-      console.log('cipherKey', cipherKey)
       throw new Error('Cipher key must be exactly 32 characters long');
     }
 
@@ -33,7 +32,6 @@ export class EasyCipher {
   }
 
   encrypt = (data: any) => {
-    // Existing AES implementation
     const iv = crypto.randomBytes(16);
     const cipher = crypto.createCipheriv(this.algorithm, this.cipherKey, iv);
 
@@ -48,11 +46,14 @@ export class EasyCipher {
   };
 
   decrypt = (data: string) => {
-    // Existing AES implementation
     const [ivHex, encryptedData] = data.split(':');
     const iv = Buffer.from(ivHex, 'hex');
 
-    const decipher = crypto.createDecipheriv(this.algorithm, this.cipherKey, iv);
+    const decipher = crypto.createDecipheriv(
+      this.algorithm,
+      this.cipherKey,
+      iv
+    );
     let decrypted = decipher.update(encryptedData, 'hex', 'utf8');
     decrypted += decipher.final('utf8');
 
