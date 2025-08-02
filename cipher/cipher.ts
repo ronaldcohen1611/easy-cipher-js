@@ -94,7 +94,7 @@ export class EasyCipher {
   };
 
   private validateDecryptData = (data: string) => {
-    if (!data) {
+    if (!data || data === '') {
       return false;
     }
 
