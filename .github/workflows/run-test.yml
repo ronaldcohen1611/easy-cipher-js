@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   test:
@@ -24,5 +27,5 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Run Unit Tests
-        run: pnpm test:unit:action
+      - name: Run Tests
+        run: pnpm test
