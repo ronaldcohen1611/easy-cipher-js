@@ -1,0 +1,26 @@
+{
+  "name": "easy-cipher-js",
+  "version": "1.0.2",
+  "description": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rm -rf dist && tsc --outDir dist",
+    "unpack": "tar -xzf easy-cipher-js-*.tgz"
+  },
+  "files": [
+    "dist/"
+  ],
+  "keywords": [],
+  "author": "Ronald Cohen",
+  "license": "ISC",
+  "packageManager": "pnpm@10.6.1",
+  "devDependencies": {
+    "@types/node": "^24.1.0",
+    "typescript": "^5.9.2"
+  },
+  "dependencies": {
+    "easy-cipher-js": "file:easy-cipher-js-1.0.2.tgz"
+  }
+}
