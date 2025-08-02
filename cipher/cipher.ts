@@ -33,6 +33,10 @@ export class EasyCipher {
   }
 
   encrypt = (data: any) => {
+    if (data == null || data === undefined) {
+      throw new Error('Invalid data');
+    }
+
     const iv = crypto.randomBytes(16);
     const cipher = crypto.createCipheriv(this.algorithm, this.cipherKey, iv);
 
@@ -47,6 +51,10 @@ export class EasyCipher {
   };
 
   decrypt = (data: string) => {
+    if (!this.validateDecryptData(data)) {
+      throw new Error('Invalid data');
+    }
+
     const [ivHex, encryptedData] = data.split(':');
     const iv = Buffer.from(ivHex, 'hex');
 
@@ -58,14 +66,44 @@ export class EasyCipher {
     let decrypted = decipher.update(encryptedData, 'hex', 'utf8');
     decrypted += decipher.final('utf8');
 
-    if (
-      ['{', '['].includes(decrypted[0]) ||
-      ['}', ']'].includes(decrypted[decrypted.length - 1])
-    ) {
-      return JSON.parse(decrypted);
+    try {
+      const parsedData = JSON.parse(decrypted);
+      // If it was a stringified Date, it will parse to an ISO string
+      // Try to convert to Date if it looks like an ISO string
+      if (
+        typeof parsedData === 'string' &&
+        !isNaN(new Date(parsedData).getTime())
+      ) {
+        return new Date(parsedData);
+      }
+      return parsedData;
+    } catch (e) {
+      // If parsing fails, return as a plain string.
+      // This covers cases where original data was a string, or
+      // JSON.parse failed because it wasn't valid JSON.
+      // Also, handle if the original data was a stringified Date but JSON.parse removes the outer quotes
+      if (
+        typeof decrypted === 'string' &&
+        !isNaN(new Date(decrypted).getTime()) &&
+        decrypted.length === new Date(decrypted).toISOString().length
+      ) {
+        return new Date(decrypted);
+      }
+      return decrypted;
+    }
+  };
+
+  private validateDecryptData = (data: string) => {
+    if (!data) {
+      return false;
     }
 
-    return decrypted;
+    const [ivHex, encryptedData] = data.split(':');
+    if (!ivHex || !encryptedData || ivHex.length !== 32) {
+      return false;
+    }
+
+    return true;
   };
 }
 
