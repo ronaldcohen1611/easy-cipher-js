@@ -82,6 +82,11 @@ describe('EasyCipher', () => {
       expect(() => cipher.encrypt(undefined)).toThrow('Invalid data');
     });
 
+    it('should fail gracefully when decrypting a empty string', () => {
+      const cipher = new EasyCipher('JF0Sov4i/FxCI/EtwtuuQPh7jqFyNQYz');
+      expect(() => cipher.decrypt('')).toThrow('Invalid data');
+    });
+
     it('should fail gracefully when decrypting invalid data', () => {
       const cipher = new EasyCipher('JF0Sov4i/FxCI/EtwtuuQPh7jqFyNQYz');
       const encrypted = 'invalid';
